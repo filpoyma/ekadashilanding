@@ -990,6 +990,204 @@ p {
   .stat-num { font-size: 52px; }
 }
 
+/* ---------- legal / support pages ---------- */
+
+.site-nav a.active {
+  color: var(--ink);
+}
+
+.site-nav a.active::after {
+  transform: scaleX(1);
+}
+
+.legal-main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 60px 32px 40px;
+}
+
+.legal-wrap {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 56px 56px 48px;
+  box-shadow: var(--shadow-md);
+}
+
+.legal-wrap .kicker {
+  margin-bottom: 16px;
+}
+
+.legal-title {
+  font-size: clamp(36px, 5vw, 56px);
+  margin-bottom: 12px;
+}
+
+.legal-meta {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.legal-lead {
+  font-size: 18px;
+  line-height: 1.65;
+  margin-bottom: 36px;
+}
+
+.legal-section {
+  margin-top: 36px;
+}
+
+.legal-section h2 {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.legal-section p {
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.legal-section ul {
+  margin: 8px 0 16px;
+  padding-left: 22px;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.legal-section li {
+  margin-bottom: 8px;
+}
+
+.legal-section a {
+  color: var(--sage-deep);
+  text-decoration: underline;
+  text-decoration-color: rgba(94, 127, 124, 0.4);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.legal-section a:hover {
+  text-decoration-color: var(--sage-deep);
+}
+
+.legal-section.disclaimer {
+  margin-top: 48px;
+  padding: 24px 28px;
+  background: rgba(230, 179, 101, 0.1);
+  border: 1px solid rgba(230, 179, 101, 0.25);
+  border-radius: var(--radius);
+}
+
+.legal-section.disclaimer h2 {
+  font-size: 20px;
+}
+
+.legal-section.disclaimer p {
+  margin-bottom: 0;
+}
+
+/* contact card on support page */
+
+.contact-card {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-top: 8px;
+  padding: 24px 28px;
+  background: linear-gradient(135deg, rgba(124, 157, 154, 0.12), rgba(230, 179, 101, 0.1));
+  border: 1px solid rgba(124, 157, 154, 0.22);
+  border-radius: var(--radius);
+}
+
+.contact-icon {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--sage), var(--sage-deep));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(94, 127, 124, 0.25);
+}
+
+.contact-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-body h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+.contact-body p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.contact-body p + p {
+  margin-top: 8px;
+}
+
+.contact-email {
+  font-weight: 600;
+  color: var(--sage-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contact-hint {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* legal pages reuse .faq-item from index, no overrides needed */
+
+/* footer-links row (shared between landing, support, privacy) */
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 28px;
+  margin-bottom: 22px;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.footer-links a {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--ink);
+}
+
+.footer-bottom a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* responsive — legal pages */
+
+@media (max-width: 720px) {
+  .legal-main { padding: 32px 20px; }
+  .legal-wrap { padding: 32px 24px; }
+  .contact-card { padding: 20px; flex-direction: column; }
+}
+
 /* ---------- reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
