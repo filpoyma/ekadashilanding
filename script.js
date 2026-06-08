@@ -74,7 +74,48 @@
     }
   }
 
-  // ---- Smooth-scroll for in-page links (graceful fallback) ---
+  // ---- Smooth-scroll for in-page links -----------------------
+  // CSS scroll-behavior and scrollIntoView({ behavior: 'smooth' })
+  // are unreliable on iOS Safari — use rAF-based animation instead.
+
+  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+  const getScrollOffset = () => {
+    const header = document.querySelector(".site-header");
+    return header ? header.getBoundingClientRect().height + 12 : 0;
+  };
+
+  const scrollToY = (targetY, duration = 750) => {
+    const startY = window.scrollY;
+    const distance = targetY - startY;
+    if (Math.abs(distance) < 2) return;
+
+    const startTime = performance.now();
+
+    const step = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      window.scrollTo(0, startY + distance * easeOutCubic(progress));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  const scrollToElement = (target) => {
+    const offset = getScrollOffset();
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const targetY = Math.max(0, Math.min(top, maxScroll));
+
+    if (reduceMotion) {
+      window.scrollTo(0, targetY);
+      return;
+    }
+
+    scrollToY(targetY);
+  };
+
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", (e) => {
       const targetId = link.getAttribute("href");
@@ -82,7 +123,18 @@
       const target = document.querySelector(targetId);
       if (!target) return;
       e.preventDefault();
-      target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      scrollToElement(target);
     });
   });
+
+  // Hash in URL on load (e.g. index.html#features)
+  if (window.location.hash) {
+    const target = document.querySelector(window.location.hash);
+    if (target) {
+      window.requestAnimationFrame(() => {
+        window.scrollTo(0, 0);
+        window.requestAnimationFrame(() => scrollToElement(target));
+      });
+    }
+  }
 })();
