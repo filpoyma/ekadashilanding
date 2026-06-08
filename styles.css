@@ -43,7 +43,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Smooth scroll is handled in script.js (reliable on iOS). */
+  scroll-behavior: auto;
 }
 
 body {
@@ -356,7 +357,7 @@ p {
   flex-wrap: wrap;
   gap: 22px;
   list-style: none;
-  padding: 0;
+  padding: 0 40px 40px 20px;
   margin: 0;
   font-size: 14px;
   color: var(--ink-soft);
@@ -856,8 +857,15 @@ p {
   transform: rotate(45deg);
 }
 
-.faq-item p {
-  margin-top: 12px;
+.faq-panel {
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+}
+
+.faq-panel p {
+  margin: 0;
+  padding-top: 12px;
   font-size: 15px;
   color: var(--ink-soft);
   line-height: 1.6;
@@ -960,7 +968,7 @@ p {
   }
   .hero-lead { margin-left: auto; margin-right: auto; }
   .hero-actions { justify-content: center; }
-  .hero-bullets { justify-content: center; }
+  .hero-bullets { justify-content: flex-start; }
   .hero-visual { min-height: 540px; }
 
   .feature-grid { grid-template-columns: repeat(2, 1fr); }
