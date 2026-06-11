@@ -63,6 +63,12 @@
             const isNewMoon = monthMoons.new.includes(day);
             const isFullMoon = monthMoons.full.includes(day);
             
+            const todayDate = new Date();
+            const isToday = (todayDate.getFullYear() === currentYear && todayDate.getMonth() === currentMonth && day === todayDate.getDate());
+            if (isToday) {
+                dayDiv.classList.add('is-today');
+            }
+            
             if (hasEkadashi) {
                 dayDiv.classList.add('has-ekadashi');
                 if (!firstEkadashiDiv) {

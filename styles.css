@@ -1369,6 +1369,24 @@ p {
     background-color: var(--sage-soft);
 }
 
+.desktop-day.is-today {
+    border: 2px solid var(--sage);
+}
+
+.desktop-day.is-today .day-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--sage);
+    color: #fff !important;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-top: -2px;
+    margin-left: -2px;
+}
+
+
 /* Web Calendar Details Side Panel */
 .desktop-calendar-details {
     border-left: 1px solid var(--card-border);
