@@ -1206,3 +1206,333 @@ p {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Web Calendar Widget ---------- */
+
+.calendar-widget-section {
+    background-color: var(--bg-soft);
+}
+
+.calendar-widget-wrapper {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 40px;
+    background-color: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    box-shadow: var(--shadow-md);
+    align-items: start;
+}
+
+.desktop-calendar-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.desktop-calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.cal-nav-btn {
+    background: transparent;
+    border: 1px solid var(--card-border);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink);
+    transition: all 0.25s ease;
+}
+
+.cal-nav-btn:hover {
+    background-color: var(--sage-soft);
+    border-color: var(--sage);
+    color: var(--sage-deep);
+}
+
+.current-month-display {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.desktop-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--peach);
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+}
+
+.desktop-days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    flex: 1;
+}
+
+.desktop-day {
+    aspect-ratio: 1.1;
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+    background-color: rgba(251, 249, 244, 0.3);
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.25s ease;
+    position: relative;
+}
+
+.desktop-day:hover:not(.empty-day) {
+    background-color: var(--sage-soft);
+    border-color: var(--sage);
+    transform: translateY(-2px);
+}
+
+.desktop-day.empty-day {
+    background: transparent;
+    border: none;
+    cursor: default;
+}
+
+.day-number {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.day-indicators {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.indicator-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+/* Highlight states for web calendar days */
+.desktop-day.has-ekadashi {
+    background-color: var(--bg-soft);
+    border: 1px solid var(--peach);
+}
+
+.desktop-day.has-ekadashi .day-number {
+    color: var(--ink);
+}
+
+.desktop-day.has-ekadashi::after {
+    content: "Ekadashi";
+    font-size: 0.65rem;
+    color: var(--sage-deep);
+    font-weight: 700;
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+}
+
+.desktop-day.has-full-moon::before {
+    content: "🌕";
+    font-size: 0.8rem;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
+
+.desktop-day.has-new-moon::before {
+    content: "🌑";
+    font-size: 0.8rem;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
+
+.desktop-day.selected-desktop-day {
+    box-shadow: 0 0 0 3px var(--sage);
+    background-color: var(--sage-soft);
+}
+
+/* Web Calendar Details Side Panel */
+.desktop-calendar-details {
+    border-left: 1px solid var(--card-border);
+    padding-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.details-content-state {
+    transition: opacity 0.3s ease;
+}
+
+.details-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background-color: var(--peach-soft);
+    color: #C07043;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.details-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--ink);
+    margin-bottom: 6px;
+}
+
+.details-date {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.details-desc {
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.details-parana-box {
+    background-color: var(--bg-soft);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.parana-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: var(--sage);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.parana-title i {
+    width: 18px;
+    height: 18px;
+}
+
+.parana-time {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 6px;
+}
+
+.parana-notice {
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    line-height: 1.4;
+}
+
+.desktop-legend {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 30px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+}
+
+.legend-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+}
+
+.legend-circle.fasting-circle {
+    background-color: var(--bg-soft);
+    border: 1px solid var(--peach);
+}
+
+/* Responsive Web Calendar Layout */
+@media (max-width: 991px) {
+    .calendar-widget-wrapper {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 30px;
+    }
+    
+    .desktop-calendar-details {
+        border-left: none;
+        border-top: 1px solid var(--card-border);
+        padding-left: 0;
+        padding-top: 30px;
+    }
+}
+
+@media (max-width: 575px) {
+    .calendar-widget-wrapper {
+        padding: 20px 15px;
+        border-radius: var(--radius);
+    }
+    
+    .desktop-weekdays {
+        font-size: 0.75rem;
+    }
+    
+    .desktop-day {
+        aspect-ratio: 1;
+        padding: 4px;
+        border-radius: 8px;
+    }
+    
+    .day-number {
+        font-size: 0.8rem;
+    }
+    
+    .desktop-day.has-ekadashi::after {
+        content: "•";
+        font-size: 1.2rem;
+        bottom: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .details-title {
+        font-size: 1.5rem;
+    }
+    
+    .desktop-legend {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding-left: 10px;
+    }
+}
+
