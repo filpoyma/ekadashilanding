@@ -17,13 +17,42 @@
         "July", "August", "September", "October", "November", "December"
     ];
 
+    const shortMonthNames = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+
+    function renderDesktopWeekdays() {
+        const weekdaysContainer = document.querySelector('.desktop-weekdays');
+        if (!weekdaysContainer) return;
+        
+        const isMobile = window.innerWidth <= 768;
+        weekdaysContainer.innerHTML = '';
+        
+        // Day.js formatting: dddd is full (e.g. Sunday), ddd is short (e.g. Sun)
+        const formatStr = isMobile ? 'ddd' : 'dddd';
+        
+        // Render weekdays starting from Sunday (day index 0)
+        for (let i = 0; i < 7; i++) {
+            const dayName = dayjs().day(i).format(formatStr);
+            const dayDiv = document.createElement('div');
+            dayDiv.innerText = dayName;
+            weekdaysContainer.appendChild(dayDiv);
+        }
+    }
+
     function renderDesktopCalendar() {
         const daysGrid = document.getElementById('desktopDaysGrid');
         const monthDisplay = document.getElementById('desktopMonthDisplay');
         if (!daysGrid || !monthDisplay) return;
         
+        // Render weekdays dynamically using Day.js
+        renderDesktopWeekdays();
+        
         // Set Header
-        monthDisplay.innerText = `${monthNames[currentMonth]} ${currentYear}`;
+        const isMobile = window.innerWidth <= 768;
+        const currentMonthName = isMobile ? shortMonthNames[currentMonth] : monthNames[currentMonth];
+        monthDisplay.innerText = `${currentMonthName} ${currentYear}`;
         daysGrid.innerHTML = '';
         
         // Calculate calendar parameters
@@ -203,6 +232,15 @@
         if (window.lucide) {
             window.lucide.createIcons();
         }
+
+        // Debounced window resize event to refresh calendar view
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                renderDesktopCalendar();
+            }, 150);
+        });
     });
 
 })();

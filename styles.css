@@ -1514,32 +1514,56 @@ p {
     }
 }
 
-@media (max-width: 575px) {
-    .calendar-widget-wrapper {
-        padding: 20px 15px;
-        border-radius: var(--radius);
-    }
-    
+@media (max-width: 768px) {
     .desktop-weekdays {
         font-size: 0.75rem;
+        padding-bottom: 8px;
+        margin-bottom: 12px;
     }
-    
+    .desktop-days-grid {
+        gap: 4px;
+    }
     .desktop-day {
         aspect-ratio: 1;
         padding: 4px;
         border-radius: 8px;
     }
-    
     .day-number {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
-    
+    .desktop-day.has-full-moon::before,
+    .desktop-day.has-new-moon::before {
+        font-size: 0.55rem;
+        top: 2px;
+        right: 2px;
+    }
+    .desktop-day.selected-desktop-day {
+        box-shadow: 0 0 0 2px var(--sage);
+    }
+    .desktop-day.is-today .day-number {
+        width: 18px;
+        height: 18px;
+        font-size: 0.7rem;
+        margin-top: 0px;
+        margin-left: 0px;
+    }
     .desktop-day.has-ekadashi::after {
-        content: "•";
-        font-size: 1.2rem;
-        bottom: 0px;
+        content: "";
+        width: 4px;
+        height: 4px;
+        background-color: var(--sage-deep);
+        border-radius: 50%;
+        position: absolute;
+        bottom: 4px;
         left: 50%;
         transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 575px) {
+    .calendar-widget-wrapper {
+        padding: 20px 15px;
+        border-radius: var(--radius);
     }
     
     .details-title {
